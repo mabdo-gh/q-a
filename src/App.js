@@ -1,25 +1,40 @@
-import logo from './logo.svg';
-import './App.css';
+import { useState } from "react";
+import { Col, Container, Row } from "react-bootstrap";
+import Header from "./components/Header";
+import Inputs from "./components/Inputs";
+import Contents from "./components/Contents";
+import Buttons from "./components/Buttons";
+import { questionsAndAnswers } from "./Data";
 
 function App() {
+
+  const [questionAndAnswer, setQuestionAndAnswer] = useState(questionsAndAnswers);
+  function insertQuestionAndAnswer() {
+    setQuestionAndAnswer([...questionsAndAnswers]);
+  }
+
+  function deleteAllQuestionsAndAnswers() {
+    questionsAndAnswers.splice(0, questionsAndAnswers.length);
+    setQuestionAndAnswer([]);
+  }
+
+  function deleteOneQuestionAndAnswer(id) {
+    setQuestionAndAnswer([...id]);
+  }
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Container className="p-5">
+      <Row className="justify-content-center">
+        <Header />
+        <Col sm="9">
+          <Inputs addQuestionAndAnswer={insertQuestionAndAnswer} />
+          <Contents data={questionAndAnswer} deleteOneQuestionAndAnswer={deleteOneQuestionAndAnswer} />
+          {questionAndAnswer.length ? (<Buttons deleteAll={deleteAllQuestionsAndAnswers} />) : null}
+          {/* <Buttons /> */}
+        </Col>
+      </Row>
+    </Container >
   );
 }
 
 export default App;
+
