@@ -1,14 +1,20 @@
 import { useState } from "react";
 import { Button, Col, Form, Row } from "react-bootstrap";
-import { questionsAndAnswers } from "../Data";
 
-function Inputs({ addQuestionAndAnswer }) {
+function Inputs({ addQuestionAndAnswer,data, notify }) {
 
     const [qu, setQu] = useState('')
     const [an, setAn] = useState('')
 
     function addQuAn() {
-        questionsAndAnswers.push({ qu: qu, an: an });
+        if (!qu || !an)
+            return notify("يجب عليك ادخال السؤال والاجابة", "error");
+        else if (!qu)
+            return notify("يجب عليك ادخال السؤال", "error");
+        else if (!an)
+            return notify("يجب عليك ادخال الاجابة", "error");
+
+        data.push({ qu: qu, an: an });
         setQu('');
         setAn('');
         addQuestionAndAnswer();
@@ -30,3 +36,8 @@ function Inputs({ addQuestionAndAnswer }) {
 }
 
 export default Inputs;
+
+/**
+ * Development by : Mahmoud Abd Elaziz
+ * Mobile : 01201576447
+ */

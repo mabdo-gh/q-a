@@ -4,37 +4,55 @@ import Header from "./components/Header";
 import Inputs from "./components/Inputs";
 import Contents from "./components/Contents";
 import Buttons from "./components/Buttons";
-import { questionsAndAnswers } from "./Data";
+import { toast, ToastContainer } from "react-toastify";
+import './App.css';
 
 function App() {
 
-  const [questionAndAnswer, setQuestionAndAnswer] = useState(questionsAndAnswers);
+  if (!localStorage.getItem("questionsAndAnswers"))
+    localStorage.setItem("questionsAndAnswers", JSON.stringify([]));
+
+  const [data, setData] = useState(JSON.parse(localStorage.getItem("questionsAndAnswers")));
+
+  const notify = (massage, type) => toast(massage, { type: type });
+
   function insertQuestionAndAnswer() {
-    setQuestionAndAnswer([...questionsAndAnswers]);
+    localStorage.setItem("questionsAndAnswers", JSON.stringify([...data]));
+    setData([...data]);
+    notify("تم الحفظ بنجاح", "success");
+  }
+
+  function removeOneQuestionAndAnswer(id) {
+    localStorage.setItem("questionsAndAnswers", JSON.stringify([...id]));
+    setData([...id]);
+    notify("تم الحذف بنجاح", "warning");
   }
 
   function deleteAllQuestionsAndAnswers() {
-    questionsAndAnswers.splice(0, questionsAndAnswers.length);
-    setQuestionAndAnswer([]);
+    localStorage.setItem("questionsAndAnswers", JSON.stringify([]));
+    data.splice(0, data.length);
+    setData([]);
+    notify("تم حذف جميع البيانات بنجاح", "error");
   }
 
-  function deleteOneQuestionAndAnswer(id) {
-    setQuestionAndAnswer([...id]);
-  }
   return (
     <Container className="p-5">
       <Row className="justify-content-center">
         <Header />
         <Col sm="9">
-          <Inputs addQuestionAndAnswer={insertQuestionAndAnswer} />
-          <Contents data={questionAndAnswer} deleteOneQuestionAndAnswer={deleteOneQuestionAndAnswer} />
-          {questionAndAnswer.length ? (<Buttons deleteAll={deleteAllQuestionsAndAnswers} />) : null}
-          {/* <Buttons /> */}
+          <Inputs addQuestionAndAnswer={insertQuestionAndAnswer} data={data} notify={notify} />
+          <Contents data={data} deleteOneQuestionAndAnswer={removeOneQuestionAndAnswer} />
+          {data.length ? (<Buttons deleteAll={deleteAllQuestionsAndAnswers} />) : null}
         </Col>
       </Row>
+      <ToastContainer rtl position="top-left" hideProgressBar />
     </Container >
   );
 }
 
 export default App;
 
+/**
+ * Development by : Mahmoud Abd Elaziz
+ * Mobile : 01201576447
+ */

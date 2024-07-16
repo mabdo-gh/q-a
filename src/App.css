@@ -1,0 +1,9 @@
+.accordion-button::after,
+.accordion-button.collapsed::after {
+    margin-right: 15px;
+}
+
+/**
+ * Development by : Mahmoud Abd Elaziz
+ * Mobile : 01201576447
+ */

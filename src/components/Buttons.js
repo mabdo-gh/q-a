@@ -9,3 +9,8 @@ function Buttons({deleteAll}) {
 }
 
 export default Buttons;
+
+/**
+ * Development by : Mahmoud Abd Elaziz
+ * Mobile : 01201576447
+ */

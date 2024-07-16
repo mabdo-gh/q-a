@@ -1,11 +1,10 @@
 import { Accordion, Alert, Button, Row } from "react-bootstrap";
-import { questionsAndAnswers } from "../Data";
 
-function Contents({ data, deleteOneQuestionAndAnswer }) {
+function Contents({ deleteOneQuestionAndAnswer, data }) {
 
     function deleteOne(index) {
-            questionsAndAnswers.splice(index, 1);
-            deleteOneQuestionAndAnswer(questionsAndAnswers);
+        data.splice(index, 1);
+        deleteOneQuestionAndAnswer(data);
     }
 
     return (
@@ -28,3 +27,8 @@ function Contents({ data, deleteOneQuestionAndAnswer }) {
 }
 
 export default Contents;
+
+/**
+ * Development by : Mahmoud Abd Elaziz
+ * Mobile : 01201576447
+ */

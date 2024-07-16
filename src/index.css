@@ -1,3 +1,7 @@
+@import 'bootstrap/dist/css/bootstrap.min.css';
+@import 'react-toastify/dist/ReactToastify.css';
+
+
 body {
   font-family: 'Almarai', sans-serif;
   font-style: normal;
@@ -9,3 +13,8 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+/**
+ * Development by : Mahmoud Abd Elaziz
+ * Mobile : 01201576447
+ */
